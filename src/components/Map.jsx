@@ -1,15 +1,29 @@
-import React, { Component } from "react";
 import "../styles/map.css";
 import CanvasDraw from "react-canvas-draw";
-import mapBackground from "../assets/map_background_crop.png"
-import trash from "../assets/trash.png"
+import mapBackground from "../assets/map_background_crop.png";
+import trash from "../assets/trash.png";
+import React, { Component } from "react";
 
 export default class Map extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      realEstateSize: 3000,
+    };
+  }
+
   saveAndClearMap = () => {
-    localStorage.setItem("savedDrawing", this.saveableCanvas.getSaveData());
+    localStorage.setItem(
+      `savedDrawing${this.props.numDrawings}`,
+      this.saveableCanvas.getSaveData()
+    );
+    this.loadableCanvas.loadSaveData(
+      localStorage.getItem(`savedDrawing${this.props.numDrawings}`)
+    );
+
     this.saveableCanvas.clear();
-    // this.loadableCanvas.loadSaveData(localStorage.getItem("savedDrawing"));
-  }  
+    this.props.addDrawing([this.props.numDrawings, this.state.realEstateSize]);
+  };
 
   render() {
     return (
@@ -20,12 +34,6 @@ export default class Map extends Component {
           imgSrc={mapBackground}
           canvasWidth={600}
         />
-        {/* <CanvasDraw
-          disabled
-          hideGrid
-          ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
-          saveData={localStorage.getItem("savedDrawing")}
-        /> */}
         <img
           id="trash-icon"
           src={trash}
