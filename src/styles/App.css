@@ -1,0 +1,10 @@
+.App {
+  height: 100vh;
+  width: 100vw;
+  background-image: url(../assets/lawnbot_background.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  position: relative;
+}
+

@@ -1,0 +1,24 @@
+#map {
+    position: absolute;
+    bottom: 1%;
+    left: 15%;
+    height: 60%;
+    width: 43%;
+}
+
+#trash-icon {
+    height: 6%;
+    width: 6%;
+    position: absolute;
+    top: 5%;
+    right: -18%;
+    z-index: 10;
+    border-radius: 50%;
+    background: rgb(233, 232, 232);
+    padding: 7px;
+}
+
+#trash-icon:hover {
+    cursor: pointer;
+    background-color: rgb(238, 174, 174);
+}
