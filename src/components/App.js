@@ -1,8 +1,6 @@
 import "../styles/App.css";
 import Map from "./Map";
 import PreviousEstimates from "./PreviousEstimates";
-import CanvasDraw from "react-canvas-draw";
-import mapBackground from "../assets/map_background_crop.png";
 import React, { Component } from "react";
 
 export default class App extends Component {
@@ -10,45 +8,26 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      lawnSizeEstimates: [],
+      lawnSizeEstimates: []
     };
   }
-
   addLawnSizeEstimate = (lawnSizeEstimate) => {
     this.setState({
       lawnSizeEstimates: this.state.lawnSizeEstimates.concat(lawnSizeEstimate),
     });
   };
 
-  createPrevEstimates = () => {
-    return this.state.lawnSizeEstimates.map((estimate, i) => {
-      return (
-        <div key={i} className="prev-estimate-container">
-          <h1 className="estimate">{estimate}</h1>
-          <CanvasDraw
-            // canvasWidth={100}
-            canvasWidth={100}
-            canvasHeight={100}
-            imgSrc={mapBackground}
-            disabled
-            hideGrid
-            saveData={localStorage.getItem(`savedDrawing${i}`)}
-          />
-        </div>
-      );
-    });
-  };
-
   render() {
-    const prevEstimates = this.createPrevEstimates();
     return (
       <div className="App">
         <Map
-          numLawnSizeEstimates={this.state.lawnSizeEstimates.length}
+          lawnSizeEstimates={this.state.lawnSizeEstimates}
           addLawnSizeEstimate={this.addLawnSizeEstimate}
         />
-        {prevEstimates.length !== 0 ? (
-          <PreviousEstimates prevEstimates={prevEstimates} />
+        {this.state.lawnSizeEstimates.length !== 0 ? (
+          <PreviousEstimates
+            lawnSizeEstimates={this.state.lawnSizeEstimates}
+          />
         ) : (
           <div></div>
         )}

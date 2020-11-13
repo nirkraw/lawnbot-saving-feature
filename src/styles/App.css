@@ -7,17 +7,3 @@
   background-position-x: center;
   position: relative;
 }
-
-.prev-estimate-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 30px 15px;
-  width: 100%;
-}
-
-.estimate {
-  font-family: sans-serif;
-  color: darkgreen;
-  font-size: 18px;
-}

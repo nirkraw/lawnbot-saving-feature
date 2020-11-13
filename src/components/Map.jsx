@@ -7,18 +7,19 @@ import React, { Component } from "react";
 export default class Map extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       realEstateSize: 0,
     };
   }
   saveAndClearMap = () => {
+    let idx = this.props.lawnSizeEstimates.length;
     localStorage.setItem(
-      `savedDrawing${this.props.numLawnSizeEstimates}`,
+      `savedDrawing${idx}`,
       this.saveableCanvas.getSaveData()
     );
-    this.saveableCanvas.clear();
     this.props.addLawnSizeEstimate(this.state.realEstateSize);
+
+    this.saveableCanvas.clear();
     this.setState({ realEstateSize: 0 });
   };
 
@@ -40,6 +41,7 @@ export default class Map extends Component {
         <h1 className="real-estate-size">{this.state.realEstateSize} sq ft</h1>
         <CanvasDraw
           ref={(canvasDraw) => (this.saveableCanvas = canvasDraw)}
+          hideGrid
           brushColor="#7CFC00"
           brushRadius={18}
           imgSrc={mapBackground}
