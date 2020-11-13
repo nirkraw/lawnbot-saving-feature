@@ -5,6 +5,10 @@
 
 To start application please cd into the lawnbot directory and run ```npm install``` and ```npm run start``` to start server.'
 
+## Project Instructions
+
+Mirroring the Measur.it tool, use the mouse to draw over the property to find the size estimate. Then discard the drawing using the trash icon. This will open a container of discarded drawings which the user can scroll through as needed.
+
 ## Libraries
 
 The application is built using the react-canvas-draw API.
