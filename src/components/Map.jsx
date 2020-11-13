@@ -7,11 +7,11 @@ import React, { Component } from "react";
 export default class Map extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      realEstateSize: 3000,
+      realEstateSize: 0,
     };
   }
-
   saveAndClearMap = () => {
     localStorage.setItem(
       `savedDrawing${this.props.numLawnSizeEstimates}`,
@@ -19,18 +19,31 @@ export default class Map extends Component {
     );
     this.saveableCanvas.clear();
     this.props.addLawnSizeEstimate(this.state.realEstateSize);
-    
+    this.setState({ realEstateSize: 0 });
+  };
+
+  createRandomEstimate = () => {
+    if (this.state.realEstateSize !== 0) {
+      this.setState({
+        realEstateSize: this.state.realEstateSize + 500,
+      });
+    } else {
+      this.setState({
+        realEstateSize: Math.floor(Math.random() * (3500 - 2500) + 2500),
+      });
+    }
   };
 
   render() {
     return (
-      <div id="map">
+      <div id="map" onMouseUp={this.createRandomEstimate}>
+        <h1 className="real-estate-size">{this.state.realEstateSize} sq ft</h1>
         <CanvasDraw
           ref={(canvasDraw) => (this.saveableCanvas = canvasDraw)}
           brushColor="#7CFC00"
-          brushRadius="18"
+          brushRadius={18}
           imgSrc={mapBackground}
-          canvasWidth={600}
+          canvasWidth={550}
         />
         <img
           id="trash-icon"

@@ -26,6 +26,7 @@ export default class App extends Component {
         <div key={i} className="prev-estimate-container">
           <h1 className="estimate">{estimate}</h1>
           <CanvasDraw
+            // canvasWidth={100}
             canvasWidth={100}
             canvasHeight={100}
             imgSrc={mapBackground}
