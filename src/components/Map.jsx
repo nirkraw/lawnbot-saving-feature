@@ -28,6 +28,7 @@ export default class Map extends Component {
         <CanvasDraw
           ref={(canvasDraw) => (this.saveableCanvas = canvasDraw)}
           brushColor="#7CFC00"
+          brushRadius="18"
           imgSrc={mapBackground}
           canvasWidth={600}
         />
