@@ -1,6 +1,6 @@
 import "../styles/App.css";
 import Map from "./Map";
-import PreviousProjects from "./PreviousProjects";
+import PreviousEstimates from "./PreviousEstimates";
 import CanvasDraw from "react-canvas-draw";
 import mapBackground from "../assets/map_background_crop.png";
 
@@ -11,44 +11,41 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      drawings: [],
+      lawnSizeEstimates: [],
     };
   }
 
-  addDrawing = (newDrawing) => {
-    let newDrawings = this.state.drawings.push(newDrawing)
-    this.setState({ drawings: newDrawings });
+  addLawnSizeEstimate = (lawnSizeEstimate) => {
+    this.setState({ lawnSizeEstimates: this.state.lawnSizeEstimates.concat(lawnSizeEstimate)});
   };
 
-  createPrevProjects = () => {
-    return this.state.drawings.map((drawing) => {
+  createPrevEstimates = () => {
+    return this.state.lawnSizeEstimates.map((estimate, i) => {
       return (
-        <div className="prev-drawing-container">
-          <h1>{drawing[1]}</h1>
+        <div key={i} className="prev-estimate-container">
+          <h1>{estimate}</h1>
           <CanvasDraw
             canvasWidth={100}
             canvasHeight={100}
             imgSrc={mapBackground}
             disabled
             hideGrid
-            ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
-            saveData={localStorage.getItem(`savedDrawing${drawing[0]}`)}
+            saveData={localStorage.getItem(`savedDrawing${i}`)}
           />
         </div>
       );
-      
     });
   };
 
   render() {
-    const prevProjects = this.createPrevProjects();
+    const prevEstimates = this.createPrevEstimates();
     return (
       <div className="App">
         <Map
-          numDrawings={this.state.drawings.length}
-          addDrawings={this.addDrawing}
+          numLawnSizeEstimates={this.state.lawnSizeEstimates.length}
+          addLawnSizeEstimate={this.addLawnSizeEstimate}
         />
-        <PreviousProjects prevProjects={prevProjects} />
+        <PreviousEstimates prevEstimates={prevEstimates} />
       </div>
     );
   }

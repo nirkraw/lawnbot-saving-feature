@@ -14,15 +14,12 @@ export default class Map extends Component {
 
   saveAndClearMap = () => {
     localStorage.setItem(
-      `savedDrawing${this.props.numDrawings}`,
+      `savedDrawing${this.props.numLawnSizeEstimates}`,
       this.saveableCanvas.getSaveData()
     );
-    this.loadableCanvas.loadSaveData(
-      localStorage.getItem(`savedDrawing${this.props.numDrawings}`)
-    );
-
     this.saveableCanvas.clear();
-    this.props.addDrawing([this.props.numDrawings, this.state.realEstateSize]);
+    this.props.addLawnSizeEstimate(this.state.realEstateSize);
+    
   };
 
   render() {
